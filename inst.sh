@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Clear
+clear
+
 #SSH Config
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/2.9/master/install/sshd_config > /dev/null 2>&1
 service ssh restart
@@ -101,7 +104,6 @@ rm squid3
 rm inst.sh
 
 #Print info
-clear
 echo "====================================="
 echo "Squid 3.3.8 instalado com sucesso!"
 echo "====================================="
