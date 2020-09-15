@@ -4,6 +4,19 @@
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/2.9/master/install/sshd_config > /dev/null 2>&1
 service ssh restart
 
+#Verif Ports
+verif_ptrs () {
+porta=$1
+PT=$(lsof -V -i tcp -P -n | grep -v "ESTABLISHED" |grep -v "COMMAND" | grep "LISTEN")
+for pton in `echo -e "$PT" | cut -d: -f2 | cut -d' ' -f1 | uniq`; do
+    svcs=$(echo -e "$PT" | grep -w "$pton" | awk '{print $1}' | uniq)
+    [[ "$porta" = "$pton" ]] && {
+    	echo -e "\nPORTA $porta EM USO PELO $svcs"
+    	sleep 2
+    }
+done
+}
+
 #Ask for password if necessary
 sudo echo
 
